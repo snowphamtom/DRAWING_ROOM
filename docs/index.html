@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DRAWING_ROOM</title>
+  <meta name="description" content="Design-concept shelf. Not MAGPIE. Not CeilingGate.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%2312110f'/><rect x='3' y='3' width='10' height='10' fill='none' stroke='%23c4a574' stroke-width='1'/></svg>">
+  <style>
+    :root {
+      --ink: #e8dfd0;
+      --mute: #9a8f7e;
+      --paper: #161410;
+      --rail: #2a261f;
+      --gold: #c4a574;
+      --hold: #6e5a48;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--paper); color: var(--ink); }
+    body {
+      font: 17px/1.5 "Iowan Old Style", Palatino, Georgia, serif;
+      min-height: 100vh;
+    }
+    header {
+      padding: 2.5rem 1.5rem 1.25rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .mark {
+      letter-spacing: 0.28em;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    h1 {
+      font-weight: 500;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: 0.08em;
+      margin: 0.4rem 0 0.6rem;
+    }
+    .note { color: var(--mute); max-width: 38rem; }
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    article {
+      border: 1px solid var(--rail);
+      background: #1b1813;
+      min-height: 210px;
+      padding: 1.15rem 1.15rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    article[data-state="open"] { border-style: dashed; }
+    article[data-state="hold"] { opacity: 0.72; }
+    .id { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); }
+    h2 { font-size: 1.15rem; font-weight: 500; margin: 0; }
+    p { margin: 0; color: var(--mute); flex: 1; }
+    .state {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    article[data-state="hold"] .state { color: var(--hold); }
+    a.plate {
+      color: inherit;
+      text-decoration: none;
+    }
+    a.plate:hover article { border-color: var(--gold); }
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 2.5rem;
+      color: var(--mute);
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--gold); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="mark">Monsters Ink · shelf</div>
+    <h1>DRAWING_ROOM</h1>
+    <p class="note">Design concepts live here as plates. The room is a webpage, not a product. MAGPIE stays the filing. CeilingGate stays the ship.</p>
+  </header>
+  <main id="wall"></main>
+  <footer>
+    Source: <a href="https://github.com/snowphamtom/DRAWING_ROOM">snowphamtom/DRAWING_ROOM</a>
+    · plates in <code>docs/concepts.json</code>
+  </footer>
+  <script>
+    const wall = document.getElementById("wall");
+    fetch("./concepts.json")
+      .then((r) => r.json())
+      .then((data) => {
+        (data.plates || []).forEach((plate) => {
+          const wrap = document.createElement(plate.href ? "a" : "div");
+          if (plate.href) {
+            wrap.className = "plate";
+            wrap.href = plate.href;
+            wrap.target = "_blank";
+            wrap.rel = "noopener";
+          }
+          const card = document.createElement("article");
+          card.dataset.state = plate.state || "open";
+          card.innerHTML =
+            '<div class="id">' + escapeHtml(plate.id || "") + '</div>' +
+            "<h2>" + escapeHtml(plate.title || "Untitled") + "</h2>" +
+            "<p>" + escapeHtml(plate.glance || "") + "</p>" +
+            '<div class="state">' + escapeHtml(plate.state || "open") + "</div>";
+          wrap.appendChild(card);
+          wall.appendChild(wrap);
+        });
+      })
+      .catch(() => {
+        wall.innerHTML = "<article><h2>Room unreadable</h2><p>concepts.json did not load.</p></article>";
+      });
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+  </script>
+</body>
+</html>

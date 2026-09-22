@@ -1,0 +1,49 @@
+{
+  "room": "DRAWING_ROOM",
+  "opened": "2026-09-21",
+  "note": "Shelf only. Occupancy does not travel. MAGPIE stays 19/658,750.",
+  "plates": [
+    {
+      "id": "plate-01",
+      "title": "Magpie public face",
+      "glance": "Monsters Ink landing. Separate from this room.",
+      "href": "https://snowphamtom.github.io/magpie/",
+      "state": "live"
+    },
+    {
+      "id": "plate-02",
+      "title": "Seraphim Organizer",
+      "glance": "Offline dump organizer. Do not edit it from this room.",
+      "href": "https://snowphamtom.github.io/seraphim-organizer/",
+      "state": "live"
+    },
+    {
+      "id": "plate-03",
+      "title": "CeilingGate",
+      "glance": "All Gas ship. Live face stays on that repo.",
+      "href": "https://snowphamtom.github.io/ceilinggate/",
+      "state": "live"
+    },
+    {
+      "id": "plate-04",
+      "title": "Open plate",
+      "glance": "Next design concept lands here. Title + glance + optional image.",
+      "href": "",
+      "state": "open"
+    },
+    {
+      "id": "plate-05",
+      "title": "Open plate",
+      "glance": "Empty shelf. Add the object, not a costume.",
+      "href": "",
+      "state": "open"
+    },
+    {
+      "id": "plate-06",
+      "title": "Hold",
+      "glance": "Unfinished concepts wait here until a public face exists.",
+      "href": "",
+      "state": "hold"
+    }
+  ]
+}
