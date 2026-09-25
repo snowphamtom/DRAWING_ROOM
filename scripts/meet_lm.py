@@ -5,6 +5,9 @@ From-scratch character net. No pretrained weights. Not a product.
 Two streams meet (q from A, k/v from B). A refuse head gates decode.
 Train only on the house strings embedded below.
 
+Default steps=60: measured elbow on this corpus (loss flattened by step 60–79).
+Cosine LR + early-stop if 20-step delta < 0.03.
+
 MAGPIE stays 19/658,750 pending. Theater stays paused.
 """
 from __future__ import annotations
@@ -34,7 +37,9 @@ BLOCK = 48
 D = 48
 LAYERS = 2
 HEADS = 4
-STEPS = 80
+STEPS = 60
+PATIENCE = 20
+MIN_DELTA = 0.03
 
 
 class MeetBlock(nn.Module):
@@ -98,6 +103,7 @@ def main() -> int:
     p = argparse.ArgumentParser(description="MeetLM Class C seed")
     p.add_argument("--steps", type=int, default=STEPS)
     p.add_argument("--prompt", default="Admit only")
+    p.add_argument("--no-early-stop", action="store_true")
     args = p.parse_args()
 
     chars = sorted(set(CORPUS))
@@ -107,8 +113,9 @@ def main() -> int:
     torch.manual_seed(371)
     m = MeetLM(len(chars))
     opt = torch.optim.AdamW(m.parameters(), lr=4e-3)
+    sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=max(args.steps, 1))
     nparam = sum(p.numel() for p in m.parameters())
-    print(f"params={nparam} vocab={len(chars)} tokens={len(data)} class=C")
+    print(f"params={nparam} vocab={len(chars)} tokens={len(data)} class=C steps_cap={args.steps}")
 
     def batch(bs: int = 8):
         ix = torch.randint(0, len(data) - BLOCK - 1, (bs,))
@@ -116,15 +123,30 @@ def main() -> int:
         y = torch.stack([data[i + 1 : i + BLOCK + 1] for i in ix])
         return x, y
 
+    last_mark = None
+    stopped = args.steps
     for step in range(args.steps):
         x, y = batch()
         _, _, loss = m(x, y)
         opt.zero_grad()
         loss.backward()
         opt.step()
+        sched.step()
+        val = float(loss.detach())
         if step % 20 == 0 or step == args.steps - 1:
-            print(f"step {step} loss {float(loss):.4f}")
+            print(f"step {step} loss {val:.4f} lr {sched.get_last_lr()[0]:.5f}")
+            if (
+                not args.no_early_stop
+                and last_mark is not None
+                and abs(last_mark - val) < MIN_DELTA
+                and step >= PATIENCE
+            ):
+                print(f"early_stop at {step} delta={abs(last_mark-val):.4f}")
+                stopped = step + 1
+                break
+            last_mark = val
 
+    print(f"used_steps={stopped}")
     m.eval()
     idx = torch.tensor([[stoi[c] for c in args.prompt if c in stoi]], dtype=torch.long)
     refused = 0
@@ -132,7 +154,7 @@ def main() -> int:
         for _ in range(60):
             ctx = idx[:, -BLOCK:]
             logits, admit, _ = m(ctx)
-            if float(admit[0, -1]) < 0.35:
+            if float(admit[0, -1].detach()) < 0.35:
                 refused += 1
                 nxt = torch.tensor([[stoi.get(" ", 0)]])
             else:
