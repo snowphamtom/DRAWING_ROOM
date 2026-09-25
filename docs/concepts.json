@@ -26,10 +26,10 @@
     },
     {
       "id": "plate-04",
-      "title": "Open plate",
-      "glance": "Next design concept lands here. Title + glance + optional image.",
-      "href": "",
-      "state": "open"
+      "title": "Four-builder lock pack",
+      "glance": "AGENTS.md, Cursor agents, Runable MEMORY+SKILL. Not a product. Open this repo in Cursor to load them.",
+      "href": "https://github.com/snowphamtom/DRAWING_ROOM",
+      "state": "live"
     },
     {
       "id": "plate-05",
