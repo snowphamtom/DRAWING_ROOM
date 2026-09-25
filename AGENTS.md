@@ -19,6 +19,11 @@ Not a new product name.
 Cursor IDE reads `.cursor/agents/` and `.cursor/rules/` when this repo is the workspace.
 This GitHub connection cannot spawn Cursor Cloud Agents.
 
+## Class C script
+
+`scripts/verify.py` runs the same fences on a text artifact. Exit 0 PASS, 2 REFUSE.
+Not a daemon product. Not a fifth builder.
+
 ## Runable
 
 `runable/MEMORY.txt` — paste once into Runable Memory.
