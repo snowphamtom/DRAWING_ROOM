@@ -1,0 +1,28 @@
+name: meet-seed
+on:
+  schedule:
+    - cron: "37 6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: cpu torch
+        run: pip install --quiet torch --index-url https://download.pytorch.org/whl/cpu
+      - name: train seed
+        run: |
+          mkdir -p artifacts
+          python scripts/meet_lm.py --steps 80 | tee artifacts/meet_last.txt
+      - name: commit ledger if changed
+        run: |
+          git config user.name meet-seed
+          git config user.email meet-seed@users.noreply.github.com
+          git add artifacts/meet_last.txt
+          git diff --cached --quiet || git commit -m "meet: seed train ledger"
+          git push || true
