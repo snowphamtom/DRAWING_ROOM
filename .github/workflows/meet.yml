@@ -15,14 +15,12 @@ jobs:
           python-version: "3.12"
       - name: cpu torch
         run: pip install --quiet torch --index-url https://download.pytorch.org/whl/cpu
-      - name: train seed
-        run: |
-          mkdir -p artifacts
-          python scripts/meet_lm.py --steps 80 | tee artifacts/meet_last.txt
+      - name: harvest + train
+        run: python3 scripts/automate_meet.py --steps 80
       - name: commit ledger if changed
         run: |
           git config user.name meet-seed
           git config user.email meet-seed@users.noreply.github.com
-          git add artifacts/meet_last.txt
-          git diff --cached --quiet || git commit -m "meet: seed train ledger"
+          git add artifacts/meet_last.txt artifacts/meet_ledger.jsonl artifacts/corpus.txt
+          git diff --cached --quiet || git commit -m "meet: daily seed ledger"
           git push || true
