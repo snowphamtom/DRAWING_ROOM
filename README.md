@@ -10,11 +10,13 @@ This room only holds plates: a title, a short glance, an optional link, an optio
 
 ## Live
 
-GitHub Pages (`docs/`):
+Working public face (CDN mirror of `docs/`, not a new product):
+https://cdn.jsdelivr.net/gh/snowphamtom/DRAWING_ROOM@main/docs/index.html
+
+GitHub Pages URL (still 404 until Settings → Pages is flipped):
 https://snowphamtom.github.io/DRAWING_ROOM/
 
-If the URL 404s, turn on Pages:
-Repo → Settings → Pages → Deploy from branch `main` / folder `/docs`.
+Vercel deploy of this repo needs the Vercel connector re-authed for team `monstersink` (403 this pass).
 
 ## Add a plate
 
