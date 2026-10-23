@@ -1,0 +1,10 @@
+sample: Admit only.
+og gesiue il iaeodopaot eeno no ncukc.
+er.
+ tS
+stv.
+s t nc
+refused_steps: 0
+used_steps: 80
+final_loss: 2.8628
+params: 60433
