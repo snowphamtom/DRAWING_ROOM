@@ -13,8 +13,11 @@ MAGPIE stays 19/658,750 pending. Theater stays paused.
 from __future__ import annotations
 
 import argparse
+import json
 import math
 import sys
+import time
+from pathlib import Path
 
 import torch
 import torch.nn as nn
@@ -164,6 +167,28 @@ def main() -> int:
     print("sample:", text)
     print("refused_steps:", refused)
     print("not a product. MAGPIE 19/658,750 pending.")
+
+    # Seed ledger: the meet-seed workflow commits these artifacts.
+    art = Path(__file__).resolve().parent.parent / "artifacts"
+    art.mkdir(parents=True, exist_ok=True)
+    (art / "meet_last.txt").write_text(
+        f"sample: {text}\nrefused_steps: {refused}\nused_steps: {stopped}\n"
+        f"final_loss: {val:.4f}\nparams: {nparam}\n"
+    )
+    with (art / "meet_ledger.jsonl").open("a") as fh:
+        fh.write(
+            json.dumps(
+                {
+                    "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                    "steps_cap": args.steps,
+                    "used_steps": stopped,
+                    "final_loss": round(val, 4),
+                    "refused_steps": refused,
+                    "params": nparam,
+                }
+            )
+            + "\n"
+        )
     return 0
 
 
