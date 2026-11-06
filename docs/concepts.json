@@ -1,7 +1,7 @@
 {
   "room": "DRAWING_ROOM",
   "opened": "2026-09-21",
-  "note": "Shelf only. Occupancy does not travel. MAGPIE stays 19/658,750.",
+  "note": "Shelf only. Occupancy does not travel. MAGPIE stays 19/658,750. Fleet cap 4 agents.",
   "plates": [
     {
       "id": "plate-01",
@@ -33,17 +33,24 @@
     },
     {
       "id": "plate-05",
+      "title": "Jett reporting line",
+      "glance": "Existing swarm-lead reports-to seat. Measured in snowphamtom/swarm. Not a fifth builder. Not occupancy travel.",
+      "href": "https://github.com/snowphamtom/swarm",
+      "state": "live"
+    },
+    {
+      "id": "plate-06",
+      "title": "Meta fence",
+      "glance": "Standing fence: do not move, rename, trash, or edit Meta AI files (Oct 10-11 cathedral/inferno/GENESIS). Shelf note only.",
+      "href": "",
+      "state": "hold"
+    },
+    {
+      "id": "plate-07",
       "title": "Open plate",
       "glance": "Empty shelf. Add the object, not a costume.",
       "href": "",
       "state": "open"
-    },
-    {
-      "id": "plate-06",
-      "title": "Hold",
-      "glance": "Unfinished concepts wait here until a public face exists.",
-      "href": "",
-      "state": "hold"
     }
   ]
 }
