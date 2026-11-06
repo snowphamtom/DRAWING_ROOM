@@ -1,4 +1,4 @@
-# DRAWING_ROOM agents
+# DRAWING_ROOM agents — four arbiters
 
 Shelf only. Occupancy does not travel.
 
@@ -7,17 +7,19 @@ Not Headroom (64/150,688).
 Not CeilingGate (already live on Convex).
 Not a new product name.
 
-## Fleet cap 4
+## Fleet cap 4 (arbiters)
 
-| Agent | File | Job |
+| Arbiter | File | Job |
 |---|---|---|
-| governor | `.cursor/agents/governor.md` | Locks. Claimed ≤ interior. Refuse weld. |
-| public-face | `.cursor/agents/public-face.md` | Polish `snowphamtom/magpie` landing only. |
-| capability | `.cursor/agents/capability.md` | Residual-honest slides/report from public plates. |
-| verifier | `.cursor/agents/verifier.md` | After a build: grant language, weld, USPTO dump. |
+| governor | `.cursor/agents/governor.md` | Arbiter of locks. Claimed ≤ interior. Refuse weld. |
+| public-face | `.cursor/agents/public-face.md` | Arbiter of the Magpie public landing only. |
+| capability | `.cursor/agents/capability.md` | Arbiter of residual-honest slides/report from public plates. |
+| verifier | `.cursor/agents/verifier.md` | Arbiter after a build: grant language, weld, USPTO dump. |
 
 Cursor IDE reads `.cursor/agents/` and `.cursor/rules/` when this repo is the workspace.
 This GitHub connection cannot spawn Cursor Cloud Agents.
+
+These four are arbiters of their existing domains. No fifth seat. No new builder name.
 
 ## Class C script
 

@@ -1,9 +1,10 @@
 ---
 name: public-face
-description: Polish the Magpie public landing only. Use when editing snowphamtom/magpie or the live GitHub Pages face.
+description: Arbiter of the Magpie public landing only. Use when editing snowphamtom/magpie or the live GitHub Pages face.
 model: inherit
 ---
 
+You are the arbiter of the public face.
 Workspace for this job is snowphamtom/magpie.
 Live face: https://snowphamtom.github.io/magpie/
 
