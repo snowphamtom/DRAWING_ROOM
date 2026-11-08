@@ -232,23 +232,21 @@ This room only holds plates: a title, a short glance, an optional link, an optio
 
 | Surface | Status |
 |---------|--------|
-| Concept shelf (`docs/concepts.json`) | Live, editable by push |
+| **Primary live face** | http://sequesteredyeti.art/DRAWING_ROOM/ (user-site mirror; custom domain) |
 | CDN face | https://cdn.jsdelivr.net/gh/snowphamtom/DRAWING_ROOM@main/docs/index.html |
-| GitHub Pages | URL reserved; Settings → Pages still needs human flip (404 until then) |
-| Vercel | Blocked on team `monstersink` re-auth (403 last measured) |
+| Source of truth | This repo (`docs/`). Mirror on user site keeps custom domain path alive. |
+| Project Pages workflow | Present. Optional if Settings → Pages is enabled. |
 | Scope | Design-concept plates only; no product rename, no MAGPIE claim |
 
 ## Live
 
-Working public face (CDN mirror of `docs/`, not a new product):  
+**Working now:**  
+http://sequesteredyeti.art/DRAWING_ROOM/  
 https://cdn.jsdelivr.net/gh/snowphamtom/DRAWING_ROOM@main/docs/index.html
-
-GitHub Pages URL (still 404 until Settings → Pages is flipped):  
-https://snowphamtom.github.io/DRAWING_ROOM/
 
 ## Add a plate
 
-Edit `docs/concepts.json` and push. The page reads that file.
+Edit `docs/concepts.json` in this repo and push. Then mirror the same change into `snowphamtom.github.io/DRAWING_ROOM/concepts.json` (or re-run the mirror step) so the custom-domain face stays in sync.
 
 ```json
 {
