@@ -12,18 +12,17 @@ This room only holds plates: a title, a short glance, an optional link, an optio
 
 | Surface | Status |
 |---------|--------|
-| Concept shelf (`docs/concepts.json`) | Live, editable by push |
-| CDN face | https://cdn.jsdelivr.net/gh/snowphamtom/DRAWING_ROOM@main/docs/index.html |
-| GitHub Pages | URL reserved; Settings → Pages still needs human flip (404 until then) |
+| Working public face | https://cdn.jsdelivr.net/gh/snowphamtom/DRAWING_ROOM@main/docs/index.html |
+| GitHub Pages | Workflow restored this pass. Requires Settings → Pages → Source = GitHub Actions (one-time human toggle). Custom domain redirect to sequesteredyeti.art currently 404s — leave or clear it. |
 | Vercel | Blocked on team `monstersink` re-auth (403 last measured) |
 | Scope | Design-concept plates only; no product rename, no MAGPIE claim |
 
 ## Live
 
-Working public face (CDN mirror of `docs/`, not a new product):  
+**Reliable face right now:**  
 https://cdn.jsdelivr.net/gh/snowphamtom/DRAWING_ROOM@main/docs/index.html
 
-GitHub Pages URL (still 404 until Settings → Pages is flipped):  
+GitHub Pages URL (after Settings flip + successful deploy):  
 https://snowphamtom.github.io/DRAWING_ROOM/
 
 ## Add a plate
